@@ -94,15 +94,33 @@ jobs:
         with:
           tag: v${{ steps.npm-tag.outputs.current-version }}
 
-      - name: Generate and Commit Changelog
-        if: success()
+      - name: Setup release-please
+        run: yarn add release-please
+
+      - name: Release Please
+        run: |
+          npx release-please release --package-name xsada-dsadsad-dsadad-workflow --version ${GITHUB_REF#refs/tags/}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release Please GitHub Action
         uses: google-github-actions/release-please-action@v4
         with:
           release-type: node
           package-name: xsada-dsadsad-dsadad-workflow
           token: ${{ secrets.GITHUB_TOKEN }}
           skip-github-release: false
-          version: v${{ steps.npm-tag.outputs.current-version }}  
+          version: v${{ steps.npm-tag.outputs.current-version }}
+          
+      # - name: Generate and Commit Changelog
+      #   if: success()
+      #   uses: google-github-actions/release-please-action@v4
+      #   with:
+      #     release-type: node
+      #     package-name: xsada-dsadsad-dsadad-workflow
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     skip-github-release: false
+      #     version: v${{ steps.npm-tag.outputs.current-version }}  
 
       # - name: Trigger Changelog Update Workflow
       #   if: success()

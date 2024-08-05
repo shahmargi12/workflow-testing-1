@@ -46,11 +46,11 @@ jobs:
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Release Please
-        uses: google-github-actions/release-please-action@v4
-        with:
-          release-type: node
-          package-name: xsada-dsadsad-dsadad-workflow
-          token: ${{ secrets.GITHUB_TOKEN }}
-          skip-github-release: false
-          version: v${{ steps.npm-tag.outputs.current-version }}  
+      # - name: Release Please
+      #   uses: google-github-actions/release-please-action@v4
+      #   with:
+      #     release-type: node
+      #     package-name: xsada-dsadsad-dsadad-workflow
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     skip-github-release: false
+      #     version: v${{ steps.npm-tag.outputs.current-version }}  

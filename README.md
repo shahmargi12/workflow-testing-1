@@ -1,7 +1,7 @@
 # Text Overflow Tooltip
 
-![npm version](https://img.shields.io/npm/v/xsada-dsadsad-dsadad-mii)
-![downloads](https://img.shields.io/npm/dt/xsada-dsadsad-dsadad-mii.svg)
+![npm version](https://img.shields.io/npm/v/xsada-dsadsad-dsadad-workflow)
+![downloads](https://img.shields.io/npm/dt/xsada-dsadsad-dsadad-workflow.svg)
 [![Contributors](https://img.shields.io/github/contributors/shahmargi12/tooltipprivate.svg)](https://github.com/shahmargi12/tooltipprivate/graphs/contributors)
 
 ## Table of Contents

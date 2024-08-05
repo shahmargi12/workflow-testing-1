@@ -94,15 +94,15 @@ jobs:
         with:
           tag: v${{ steps.npm-tag.outputs.current-version }}
 
-      # - name: Generate and Commit Changelog
-      #   if: success()
-      #   uses: google-github-actions/release-please-action@v4
-      #   with:
-      #     release-type: node
-      #     package-name: xsada-dsadsad-dsadad-workflow
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     skip-github-release: false
-      #     version: v${{ steps.npm-tag.outputs.current-version }}  
+      - name: Generate and Commit Changelog
+        if: success()
+        uses: google-github-actions/release-please-action@v4
+        with:
+          release-type: node
+          package-name: xsada-dsadsad-dsadad-workflow
+          token: ${{ secrets.GITHUB_TOKEN }}
+          skip-github-release: false
+          version: v${{ steps.npm-tag.outputs.current-version }}  
 
       # - name: Trigger Changelog Update Workflow
       #   if: success()

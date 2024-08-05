@@ -1,0 +1,56 @@
+name: Release Please
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  prepare-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install Dependencies
+        run: yarn
+
+      - name: Get latest git tag
+        id: git-tag-latest
+        uses: actions-ecosystem/action-get-latest-tag@v1
+
+      # - name: Get version from package.json
+      #   id: get_version
+      #   run: |
+      #     VERSION=$(node -p "require('./package.json').version")
+      #     echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      # - name: Install release-please
+      #   run: yarn add release-please
+
+      # - name: Create release
+      #   run: yarn run release-please release --package-name xsada-dsadsad-dsadad-workflow --version ${{ github.ref_name }}
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # - name: Release Please
+      #   uses: google-github-actions/release-please-action@v4
+      #   with:
+      #     release-type: node
+      #     package-name: xsada-dsadsad-dsadad-workflow
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     skip-github-release: false
+      #     version: v${{ steps.npm-tag.outputs.current-version }}  

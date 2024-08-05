@@ -12,7 +12,7 @@ export default defineConfig({
     build: {
         lib: {
             entry: resolve('src', 'components/index.ts'),
-            name: 'xsada-dsadsad-dsadad-mii-react',
+            name: 'xsada-dsadsad-dsadad-workflow-react',
             formats: ['es'],
             fileName: (format) => `fdfsadsad-rds.${format}.js`,
         },

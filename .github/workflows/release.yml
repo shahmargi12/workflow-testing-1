@@ -1,0 +1,114 @@
+name: release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - src/**
+      - package.json
+      - yarn.lock
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  
+concurrency:
+  group: library-publish
+  cancel-in-progress: false
+
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    outputs:
+      version-bumped: ${{ steps.version-check.outputs.bumped }}
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Get latest git tag
+        id: git-tag-latest
+        uses: actions-ecosystem/action-get-latest-tag@v1
+
+      - name: Remove tag 'v' prefix
+        run: echo "GIT_VERSION=$(echo ${{ steps.git-tag-latest.outputs.tag }} | cut -c2-)" >> $GITHUB_ENV
+
+      - name: Get npm version
+        id: npm-version
+        uses: martinbeentjes/npm-get-version-action@3cf273023a0dda27efcd3164bdfb51908dd46a5b # v1.3.1
+
+      - name: Output versions
+        run: |
+          echo git ${{ env.GIT_VERSION }}
+          echo npm ${{ steps.npm-version.outputs.current-version }}
+
+      - name: Check if version is bumped
+        id: version-check
+        run: |
+          if [[ "${{ env.GIT_VERSION }}" == "${{ steps.npm-version.outputs.current-version }}" ]]; then
+            echo "Versions match. Skipping publish."
+            echo "bumped=false" >> $GITHUB_OUTPUT
+          else
+            echo "Versions do not match. Proceeding with publish."
+            echo "bumped=true" >> $GITHUB_OUTPUT
+          fi
+          
+  build-and-publish:
+    runs-on: ubuntu-latest
+    needs: check-version
+    if: needs.check-version.outputs.version-bumped == 'true'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+
+      - name: Setup Node
+        uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+
+
+      - name: Get npm version
+        id: npm-tag
+        uses: martinbeentjes/npm-get-version-action@3cf273023a0dda27efcd3164bdfb51908dd46a5b # v1.3.1
+
+      - name: Install Dependencies
+        run: yarn
+
+      - name: Linter Checks
+        run: yarn lint
+
+      - name: Build Library
+        run: yarn build
+
+      - name: Publish Shared Components to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_WORKFLOW }}
+
+      - name: Create git tag
+        if: success()
+        uses: rickstaa/action-create-tag@a1c7777fcb2fee4f19b0f283ba888afa11678b72 # v1.7.2
+        with:
+          tag: v${{ steps.npm-tag.outputs.current-version }}
+
+      # - name: Generate and Commit Changelog
+      #   if: success()
+      #   uses: google-github-actions/release-please-action@v4
+      #   with:
+      #     release-type: node
+      #     package-name: xsada-dsadsad-dsadad-mii
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     skip-github-release: false
+      #     version: v${{ steps.npm-tag.outputs.current-version }}  
+
+
+
+      # - name: Trigger Changelog Update Workflow
+      #   if: success()
+      #   uses: peter-evans/repository-dispatch@v2
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     event-type: update-changelog

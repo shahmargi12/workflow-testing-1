@@ -17,7 +17,7 @@ export const tooltipLabel = (
         <br />
         This is why it is displayed below instead! This tooltip does not fit above the button.
         <br />
-        This is why it's displayed below instead!
+        This is why it is displayed below instead!
     </div>
 );
 

@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.0.13](https://github.com/shahmargi12/workflow-testing-1/compare/v0.0.12...v0.0.13) (2024-08-06)
+
+
+### Features
+
+* change header tag ([d21ba8c](https://github.com/shahmargi12/workflow-testing-1/commit/d21ba8ca01c4e1e8e8ef065006bdfb50c0ec82ef))
+* Update release.yml ([301febd](https://github.com/shahmargi12/workflow-testing-1/commit/301febd74a59a0b4a15ea7b1e1369ce2688913ea))
+
+
+### Bug Fixes
+
+* update package version ([31b4edc](https://github.com/shahmargi12/workflow-testing-1/commit/31b4edc809eb35d09efef8a8eca93abf83c82f7f))
+
+
+### Miscellaneous Chores
+
+* release 0.0.13 ([ca513b9](https://github.com/shahmargi12/workflow-testing-1/commit/ca513b9ae98aa93b6662fe25e415b9dd19d2d795))
+
 ## [0.0.12](https://github.com/shahmargi12/workflow-testing-1/compare/v0.0.11...v0.0.12) (2024-08-06)
 
 

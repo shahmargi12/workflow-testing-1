@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.11](https://github.com/shahmargi12/workflow-testing-1/compare/v0.0.10...v0.0.11) (2024-08-06)
+
+
+### Bug Fixes
+
+* update package version ([f5588a7](https://github.com/shahmargi12/workflow-testing-1/commit/f5588a7a8026d37b644a19c7b26c2a5614e59ebe))
+
 ## [0.0.10](https://github.com/shahmargi12/workflow-testing-1/compare/v0.0.9...v0.0.10) (2024-08-06)
 
 

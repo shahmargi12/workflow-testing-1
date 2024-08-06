@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.14](https://github.com/shahmargi12/workflow-testing-1/compare/v0.0.13...v0.0.14) (2024-08-06)
+
+
+### Bug Fixes
+
+* Update release.yml ([1bce8db](https://github.com/shahmargi12/workflow-testing-1/commit/1bce8db0ea4394986d6b372c125e3290c58fffcc))
+
 ## [0.0.13](https://github.com/shahmargi12/workflow-testing-1/compare/v0.0.12...v0.0.13) (2024-08-06)
 
 

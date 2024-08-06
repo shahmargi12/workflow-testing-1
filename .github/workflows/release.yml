@@ -8,6 +8,8 @@ on:
       - src/**
       - package.json
       - yarn.lock
+      - changelog.md
+
   workflow_dispatch:
 
 permissions:

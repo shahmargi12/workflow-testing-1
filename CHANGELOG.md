@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.0.15](https://github.com/shahmargi12/workflow-testing-1/compare/v0.0.14...v0.0.15) (2024-08-06)
+
+
+### Features
+
+* change header tag ([c9f1f24](https://github.com/shahmargi12/workflow-testing-1/commit/c9f1f24add653324c4ccaf3b417e1e11a7c4744f))
+* change message ([523751a](https://github.com/shahmargi12/workflow-testing-1/commit/523751a1c7d9132d684a6c58f8db0c98605e38d2))
+* change message ([a179bb1](https://github.com/shahmargi12/workflow-testing-1/commit/a179bb18bc5e1b58e37418c94cdf3a114bd6d79e))
+* change message ([dfed5a2](https://github.com/shahmargi12/workflow-testing-1/commit/dfed5a2e6bbdca7f70e1ee88f5e09d95e99bffcf))
+* change message ([4936483](https://github.com/shahmargi12/workflow-testing-1/commit/49364834ec6cef392fb55494f5e6fd01afd99087))
+* remove extra text ([11adb7c](https://github.com/shahmargi12/workflow-testing-1/commit/11adb7c59920a698906036b934ac3427cb351bcd))
+* update message ([f39bd0b](https://github.com/shahmargi12/workflow-testing-1/commit/f39bd0b780e2f7633cb3558b3496231e7da6fdcb))
+* Update pr check.yml ([e91975b](https://github.com/shahmargi12/workflow-testing-1/commit/e91975b2a9096b80b00d4634f537e632a2267835))
+* Update pr check.yml ([003d2c0](https://github.com/shahmargi12/workflow-testing-1/commit/003d2c0e4839115d79353ca27ec3786809c9ded5))
+* Update pr check.yml ([8a1308e](https://github.com/shahmargi12/workflow-testing-1/commit/8a1308e53d125aa95c872ca97b3644a918acdbdf))
+* Update pr check.yml ([9deeb20](https://github.com/shahmargi12/workflow-testing-1/commit/9deeb206b9acbe0515743a1dd58e87e417cf8269))
+* Update pr check.yml ([e20645e](https://github.com/shahmargi12/workflow-testing-1/commit/e20645ebe3c3eb95a7473518f8977f132172793d))
+* Update pr check.yml ([aef30d2](https://github.com/shahmargi12/workflow-testing-1/commit/aef30d294ab56f28782e79b731ccae6902984126))
+
+
+### Bug Fixes
+
+* update package version ([21eb023](https://github.com/shahmargi12/workflow-testing-1/commit/21eb0230693f8748c9e084713f35473bfdc7e531))
+
+
+### Miscellaneous Chores
+
+* release 0.0.15 ([8c4154a](https://github.com/shahmargi12/workflow-testing-1/commit/8c4154a1a0a07ed5e4c24b7c74e1773b0c655fa3))
+
 ## [0.0.14](https://github.com/shahmargi12/workflow-testing-1/compare/v0.0.13...v0.0.14) (2024-08-06)
 
 

@@ -1,6 +1,6 @@
 {
     "name": "xsada-dsadsad-dsadad-workflow",
-    "version": "0.0.15",
+    "version": "0.0.13",
     "type": "module",
     "scripts": {
         "dev": "vite",

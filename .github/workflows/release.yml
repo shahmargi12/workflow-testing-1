@@ -71,7 +71,6 @@ jobs:
           node-version: 20
           registry-url: https://registry.npmjs.org/
 
-
       - name: Get npm version
         id: npm-tag
         uses: martinbeentjes/npm-get-version-action@3cf273023a0dda27efcd3164bdfb51908dd46a5b # v1.3.1
@@ -85,7 +84,15 @@ jobs:
       - name: Build Library
         run: yarn build
 
+      - name: Release Please GitHub Action
+        uses: googleapis/release-please-action@v4
+        with:
+          release-type: node
+          token: ${{ secrets.GITHUB_TOKEN }}
+        
+
       - name: Publish Shared Components to npm
+        if: ${{ steps.release.outputs.release_created == 'true' }}
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_WORKFLOW }}
@@ -95,47 +102,3 @@ jobs:
         uses: rickstaa/action-create-tag@a1c7777fcb2fee4f19b0f283ba888afa11678b72 # v1.7.2
         with:
           tag: v${{ steps.npm-tag.outputs.current-version }}
-
-      - name: Release Please GitHub Action
-        uses: google-github-actions/release-please-action@v4
-        with:
-          release-type: node
-          package-name: xsada-dsadsad-dsadad-workflow
-          token: ${{ secrets.GITHUB_TOKEN }}
-          skip-github-release: false
-          version: v${{ steps.npm-tag.outputs.current-version }}
-
-      # - name: Setup release-please
-      #   run: yarn add release-please
-
-      # - name: Release Please
-      #   run: |
-      #     npx release-please release --package-name xsada-dsadsad-dsadad-workflow --version ${GITHUB_REF#refs/tags/}
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Release Please GitHub Action
-      #   uses: google-github-actions/release-please-action@v4
-      #   with:
-      #     release-type: node
-      #     package-name: xsada-dsadsad-dsadad-workflow
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     skip-github-release: false
-      #     version: v${{ steps.npm-tag.outputs.current-version }}
-          
-      # - name: Generate and Commit Changelog
-      #   if: success()
-      #   uses: google-github-actions/release-please-action@v4
-      #   with:
-      #     release-type: node
-      #     package-name: xsada-dsadsad-dsadad-workflow
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     skip-github-release: false
-      #     version: v${{ steps.npm-tag.outputs.current-version }}  
-
-      # - name: Trigger Changelog Update Workflow
-      #   if: success()
-      #   uses: peter-evans/repository-dispatch@v2
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     event-type: update-changelog

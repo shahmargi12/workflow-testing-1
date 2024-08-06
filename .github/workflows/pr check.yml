@@ -12,7 +12,7 @@ jobs:
   pr-checks:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -32,6 +32,8 @@ jobs:
       - name: Output versions
         run: |
           echo git ${{ env.GIT_VERSION }}
+          echo ${{github.event.pull_request.number}} 
+          echo ${{github.event.number}}
           echo npm ${{ steps.npm-version.outputs.current-version }}
 
       - name: Check if tag already exists
@@ -58,7 +60,8 @@ jobs:
         if: ${{env.push_commit == 'true'}} 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh pr checkout ${{ github.event.pull_request.number }}
+        run: |
+              gh pr checkout ${{ github.event.pull_request.number }}
 
       - name: Push changes
         if: ${{env.push_commit == 'true' && success()}}

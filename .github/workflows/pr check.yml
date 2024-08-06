@@ -45,13 +45,30 @@ jobs:
               echo git tag for npm versions already exists.
               exit 1
             else
+              echo "push_commit=true" >> $GITHUB_ENV
               echo "Tag does not exist. Creating empty commit."
+              # git config --global user.name 'github-actions[bot]'
+              # git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+              # git commit --allow-empty -m "chore: release ${{ steps.npm-version.outputs.current-version }}" -m "Release-As: ${{ steps.npm-version.outputs.current-version }}"
+              # # git push
+            fi        
+          fi
+
+      - name: Checkout PR
+        if: ${{env.push_commit == 'true'}} 
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr checkout ${{ github.event.pull_request.number }}
+
+      - name: Push changes
+        if: ${{env.push_commit == 'true' && success()}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
               git config --global user.name 'github-actions[bot]'
               git config --global user.email 'github-actions[bot]@users.noreply.github.com'
               git commit --allow-empty -m "chore: release ${{ steps.npm-version.outputs.current-version }}" -m "Release-As: ${{ steps.npm-version.outputs.current-version }}"
               git push
-            fi        
-          fi
 
       - name: Install Dependencies
         run: yarn

@@ -4,7 +4,7 @@ import { tooltip } from './App.helper';
 function App() {
     return (
         <>
-            <h2>Tooltip Demo</h2>
+            <h1>Tooltip Demo</h1>
             <div className="container">
                 {tooltip.map((tlp, index) => (
                     <Tooltip

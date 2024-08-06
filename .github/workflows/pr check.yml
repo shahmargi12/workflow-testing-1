@@ -58,7 +58,9 @@ jobs:
         if: ${{env.push_commit == 'true'}} 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh pr checkout ${{ github.event.pull_request.number }}
+        run: |
+              echo ${{github.event.pull_request.number}} ${{github.event.number}}
+              gh pr checkout ${{ github.event.pull_request.number }}
 
       - name: Push changes
         if: ${{env.push_commit == 'true' && success()}}

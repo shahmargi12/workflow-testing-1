@@ -99,7 +99,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_WORKFLOW }}
 
       - name: Create git tag
-        if: success()
+        if: ${{ steps.release.outputs.release_created == 'true' && success() }}
         uses: rickstaa/action-create-tag@a1c7777fcb2fee4f19b0f283ba888afa11678b72 # v1.7.2
         with:
           tag: v${{ steps.npm-tag.outputs.current-version }}

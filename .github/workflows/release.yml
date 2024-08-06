@@ -89,7 +89,6 @@ jobs:
         with:
           release-type: node
           token: ${{ secrets.GITHUB_TOKEN }}
-          skip-github-release: true	
         
 
       - name: Publish Shared Components to npm

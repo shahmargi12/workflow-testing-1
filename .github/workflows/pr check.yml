@@ -70,7 +70,6 @@ jobs:
               git commit --allow-empty -m "chore: release ${{ steps.npm-version.outputs.current-version }}" -m "Release-As: ${{ steps.npm-version.outputs.current-version }}"
               git push
 
-
       - name: Install Dependencies
         run: yarn
 

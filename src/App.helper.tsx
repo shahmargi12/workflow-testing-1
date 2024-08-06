@@ -26,7 +26,7 @@ export const tooltip: Tooltip[] = [
         title: 'right',
         tooltipLabel: (
             <span>
-                Tooltip tooltip <br />
+                Tooltip tooltip tooltip <br />
                 right side
             </span>
         ),

@@ -12,7 +12,7 @@ jobs:
   pr-checks:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
       pull-requests: read
       
     steps:

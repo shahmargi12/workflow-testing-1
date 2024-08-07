@@ -85,20 +85,24 @@ jobs:
       - name: Build Library
         run: yarn build
 
-      - name: Release Please GitHub Action
-        uses: googleapis/release-please-action@v4
-        id: release
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
         with:
-          release-type: node
-          token: ${{ secrets.GITHUB_TOKEN }}
+          version: npx changeset version
+          # publish: npx changeset publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_PUBLISH_WORKFLOW }}
+
           
       - name: Output versions
         run: |
-          echo ${{ steps.release.outputs.release_created }} 
+          echo ${{ steps.changesets.outputs.published }} 
           echo npm ${{ steps.npm-version.outputs.current-version }}
 
       - name: Publish Shared Components to npm
-        if: ${{steps.release.outputs.release_created}}
+        if: ${{steps.changesets.outputs.published}}
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_WORKFLOW }}

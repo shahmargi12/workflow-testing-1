@@ -62,64 +62,15 @@ jobs:
               exit 1
             else
               echo "Tag does not exist. Checking release commit message."
-              if [[ "${{ env.RELEASE_COMMIT_MESSAGE }}" != *"chore: release ${{ steps.npm-version.outputs.current-version }}"* ]]; then
-                echo "push_commit=true" >> $GITHUB_ENV
-                echo 'git commit --allow-empty -m "chore: release ${{ steps.npm-version.outputs.current-version }}" -m "Release-As: ${{ steps.npm-version.outputs.current-version }}"'
+              # if [[ "${{ env.RELEASE_COMMIT_MESSAGE }}" != *"chore: release ${{ steps.npm-version.outputs.current-version }}"* ]]; then
+              #   echo "push_commit=true" >> $GITHUB_ENV
+              #   echo 'git commit --allow-empty -m "chore: release ${{ steps.npm-version.outputs.current-version }}" -m "Release-As: ${{ steps.npm-version.outputs.current-version }}"'
 
-                exit 1
-              fi
+              #   exit 1
+              # fi
             fi        
           fi
           
-      # - name: Check if tag already exists
-      #   run: |
-      #     if [[ "${{ env.GIT_VERSION }}" == "${{ steps.npm-version.outputs.current-version }}" ]]; then
-      #       echo "Versions match. Skipping publish."
-      #     else
-      #       echo "Versions do not match. Checking if tag exists."
-      #       tag_exists=$(git tag -l "v${{ steps.npm-version.outputs.current-version }}")
-      #       if [[ -n "$tag_exists" ]]; then
-      #         echo git tag for npm versions already exists.
-      #         exit 1
-      #       else
-      #         echo "push_commit=true" >> $GITHUB_ENV
-      #         echo "Tag does not exist. Checking for release commit."
-      #         release_commit=$(git log --grep="Release-As: ${{ steps.npm-version.outputs.current-version }}" -1)
-      #         if [[ -z "$release_commit" ]]; then
-      #           echo "Release commit not found. Please run the following command:"
-      #           echo 'git commit --allow-empty -m "chore: release ${{ steps.npm-version.outputs.current-version }}" -m "Release-As: ${{ steps.npm-version.outputs.current-version }}"'
-      #           exit 1
-      #         else
-      #           echo "Release commit found. Proceeding with the workflow."
-      #         fi
-
-      #         # git config --global user.name 'github-actions[bot]'
-      #         # git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-      #         # git commit --allow-empty -m "chore: release ${{ steps.npm-version.outputs.current-version }}" -m "Release-As: ${{ steps.npm-version.outputs.current-version }}"
-      #         # # git push
-      #       fi        
-      #     fi
-
-      # - name: Checkout PR
-      #   if: ${{env.push_commit == 'true'}} 
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: |
-      #         gh pr checkout ${{ github.event.pull_request.number }}
-
-      # - name: Push changes
-      #   if: ${{env.push_commit == 'true' && success()}}
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: |
-      #         git config --global user.name 'github-actions[bot]'
-      #         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-      #         git commit --allow-empty -m "chore: release ${{ steps.npm-version.outputs.current-version }}" -m "Release-As: ${{ steps.npm-version.outputs.current-version }}"
-      #         # git push origin HEAD:${{ github.event.pull_request.head.ref }}
-      #         git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.event.pull_request.head.repo.full_name }} HEAD:${{ github.event.pull_request.head.ref }}
-      #         # git push $(git config --get branch.$(git symbolic-ref HEAD --short).pushRemote) +@:$(git config --get branch.$(git symbolic-ref HEAD --short).merge | awk -F / '{print $NF}')
-      #         # git push
-
       - name: Install Dependencies
         run: yarn
 

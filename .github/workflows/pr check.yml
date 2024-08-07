@@ -37,7 +37,11 @@ jobs:
           echo ${{github.event.pull_request.number}} 
           echo ${{github.event.number}}
           echo npm ${{ steps.npm-version.outputs.current-version }}
-
+      - name: Log all commits
+        run: |
+          echo "Logging all commits between latest tag and current branch head"
+          git log ${{ steps.git-tag-latest.outputs.tag }}..HEAD --oneline
+          
       - name: Check if tag already exists
         run: |
           if [[ "${{ env.GIT_VERSION }}" == "${{ steps.npm-version.outputs.current-version }}" ]]; then

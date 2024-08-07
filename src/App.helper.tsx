@@ -11,7 +11,7 @@ type Tooltip = {
 
 export const tooltipLabel = (
     <div>
-        This tooltippppp does not fit above the button.
+        This tooltip does not fit above the button.
         <br />
         This is why it is displayed below instead! This tooltip does not fit above the button.
         <br />

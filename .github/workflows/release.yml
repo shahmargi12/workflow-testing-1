@@ -87,23 +87,24 @@ jobs:
 
       - name: Release Please GitHub Action
         uses: googleapis/release-please-action@v4
+        id: release
         with:
           release-type: node
           token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Output versions
         run: |
-          echo ${{steps.release.outputs.release_created}} 
+          echo ${{ steps.release.outputs.release_created }} 
           echo npm ${{ steps.npm-version.outputs.current-version }}
 
       - name: Publish Shared Components to npm
-        if: steps.release.outputs.release_created == 'true'
+        if: ${{steps.release.outputs.release_created}}
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_WORKFLOW }}
 
       - name: Create git tag
-        if: steps.release.outputs.release_created == 'true'
+        if: ${{steps.release.outputs.release_created == 'true'}}
         uses: rickstaa/action-create-tag@v1.7.2
         with:
           tag: v${{ steps.npm-tag.outputs.current-version }}

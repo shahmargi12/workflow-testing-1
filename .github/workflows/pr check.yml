@@ -64,6 +64,7 @@ jobs:
               echo "Tag does not exist. Checking release commit message."
               if [[ "${{ env.RELEASE_COMMIT_MESSAGE }}" != *"chore: release ${{ steps.npm-version.outputs.current-version }}"* ]]; then
                 echo "push_commit=true" >> $GITHUB_ENV
+                exit 1
               fi
             fi        
           fi

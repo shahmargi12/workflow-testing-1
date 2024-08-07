@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.18](https://github.com/shahmargi12/workflow-testing-1/compare/v0.0.17...v0.0.18) (2024-08-07)
+
+
+### Features
+
+* package change ([4c2aa25](https://github.com/shahmargi12/workflow-testing-1/commit/4c2aa25c5cb4c33332f9a3a84267dfe7a4867e54))
+
+
+### Miscellaneous Chores
+
+* release 0.0.18 ([3a8e073](https://github.com/shahmargi12/workflow-testing-1/commit/3a8e0735df6aa277a8f3c2cf8daf3f0e08e1f1bf))
+
 ## [0.0.17](https://github.com/shahmargi12/workflow-testing-1/compare/v0.0.16...v0.0.17) (2024-08-07)
 
 

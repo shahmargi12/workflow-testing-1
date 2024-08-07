@@ -103,8 +103,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_WORKFLOW }}
 
-      - name: Create git tag
-        if: ${{steps.release.outputs.release_created == 'true'}}
-        uses: rickstaa/action-create-tag@v1.7.2
-        with:
-          tag: v${{ steps.npm-tag.outputs.current-version }}
+      # - name: Create git tag
+      #   if: ${{steps.release.outputs.release_created == 'true'}}
+      #   uses: rickstaa/action-create-tag@v1.7.2
+      #   with:
+      #     tag: v${{ steps.npm-tag.outputs.current-version }}

@@ -12,9 +12,8 @@ jobs:
   pr-checks:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
       pull-requests: read
-      repository-projects: read
       
     steps:
       - name: Checkout repository
@@ -38,11 +37,6 @@ jobs:
           echo ${{github.event.number}}
           echo npm ${{ steps.npm-version.outputs.current-version }}
           
-      - name: Log all commits
-        run: |
-          echo "Logging all commits between latest tag and current branch head"
-          git log ${{ steps.git-tag-latest.outputs.tag }}..HEAD --oneline
-
       - name: Get release commit message
         id: release-commit
         run: |
@@ -62,12 +56,11 @@ jobs:
               exit 1
             else
               echo "Tag does not exist. Checking release commit message."
-              # if [[ "${{ env.RELEASE_COMMIT_MESSAGE }}" != *"chore: release ${{ steps.npm-version.outputs.current-version }}"* ]]; then
-              #   echo "push_commit=true" >> $GITHUB_ENV
-              #   echo 'git commit --allow-empty -m "chore: release ${{ steps.npm-version.outputs.current-version }}" -m "Release-As: ${{ steps.npm-version.outputs.current-version }}"'
-
-              #   exit 1
-              # fi
+              if [[ "${{ env.RELEASE_COMMIT_MESSAGE }}" != *"chore: release ${{ steps.npm-version.outputs.current-version }}"* ]]; then
+                echo "Expected commit message not found. Please run the following command:"
+                echo 'git commit --allow-empty -m "chore: release ${{ steps.npm-version.outputs.current-version }}" -m "Release-As: ${{ steps.npm-version.outputs.current-version }}"'
+                exit 1
+              fi
             fi        
           fi
           

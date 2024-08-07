@@ -9,12 +9,12 @@ on:
       - package.json
       - yarn.lock
       - CHANGELOG.md
+
   workflow_dispatch:
 
 permissions:
   contents: write
-  pull-requests: write
-  issues: write
+  pull-requests: read
   
 concurrency:
   group: library-publish
@@ -85,30 +85,15 @@ jobs:
       - name: Build Library
         run: yarn build
 
-      - name: Create Release Pull Request or Publish to npm
-        id: changesets
-        uses: changesets/action@v1
+      - name: Release Please GitHub Action
+        uses: googleapis/release-please-action@v4
+        id: release
         with:
-          version: npx changeset version
-          # publish: npx changeset publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_PUBLISH_WORKFLOW }}
-
+          release-type: node
+          token: ${{ secrets.GITHUB_TOKEN }}
           
-      - name: Output versions
-        run: |
-          echo ${{ steps.changesets.outputs.published }} 
-          echo npm ${{ steps.npm-version.outputs.current-version }}
-
       - name: Publish Shared Components to npm
-        if: ${{steps.changesets.outputs.published}}
+        if: ${{steps.release.outputs.release_created}}
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_WORKFLOW }}
-
-      # - name: Create git tag
-      #   if: ${{steps.release.outputs.release_created == 'true'}}
-      #   uses: rickstaa/action-create-tag@v1.7.2
-      #   with:
-      #     tag: v${{ steps.npm-tag.outputs.current-version }}

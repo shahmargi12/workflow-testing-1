@@ -39,7 +39,7 @@
 * change package version ([f5f9ffb](https://github.com/shahmargi12/workflow-testing-1/commit/f5f9ffb38065d8363bc5301cfe76a90409de73bc))
 * change package version ([9e1e2b3](https://github.com/shahmargi12/workflow-testing-1/commit/9e1e2b337f25d3d90753103a1504a82686acc7cd))
 * change package version ([1cc7913](https://github.com/shahmargi12/workflow-testing-1/commit/1cc7913c366b9028c7473715d4509e4f0707c5eb))
-* change tooltip label text ([95ee6e9](https://github.com/shahmargi12/workflow-testing-1/commit/95ee6e98208ff8f907b3af4fd0bae106577e751c))
+* change tooltip label text ([95ee6e9](https://github.com/shahmargi12/workflow-testing-1/commit/- feat: change tooltip label text (PR #22)
 * change tooltip label text ([d533426](https://github.com/shahmargi12/workflow-testing-1/commit/d5334260e72e6caba1359da9227df1f264d1e051))
 * change tooltip label text ([894f208](https://github.com/shahmargi12/workflow-testing-1/commit/894f208acc743ec20cf176c3ec478f015420a209))
 * change tooltip label text ([4527a4b](https://github.com/shahmargi12/workflow-testing-1/commit/4527a4b9110ca8881f3eb2e64bdb17aa7ae11077))

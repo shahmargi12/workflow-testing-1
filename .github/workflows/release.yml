@@ -102,6 +102,9 @@ jobs:
             number=$(echo "$pr" | jq -r '.number')
             echo "PR #$number: Commit $commit - Title: $title"
           done
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Correct environment variable
+
 
       - name: Replace commit messages with PR titles
         run: |

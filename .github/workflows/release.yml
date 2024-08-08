@@ -95,11 +95,11 @@ jobs:
       - name: Replace commit messages with PR titles
         run: |
           prs=$(gh pr list --state merged --json title,number,mergeCommit)
-          echo "$prs" | jq -c '.[]' | while read pr; do
+          echo "$prs" | jq -c '.[]' | while read -r pr; do
             commit=$(echo "$pr" | jq -r '.mergeCommit.oid')
             title=$(echo "$pr" | jq -r '.title')
             number=$(echo "$pr" | jq -r '.number')
-            sed -i "s/$commit.*/- $title (PR #$number)/" CHANGELOG.md
+            sed -i "s/$(printf '%s' "$commit")/- $(printf '%s' "$title") (PR #$(printf '%s' "$number"))/" CHANGELOG.md
           done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

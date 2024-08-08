@@ -92,6 +92,17 @@ jobs:
           release-type: node
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Debug PR Titles and Commits
+        run: |
+          prs=$(gh pr list --state merged --json title,number,mergeCommit)
+          echo "$prs" > pr_debug.json
+          for pr in $(echo "$prs" | jq -c '.[]'); do
+            commit=$(echo "$pr" | jq -r '.mergeCommit.oid')
+            title=$(echo "$pr" | jq -r '.title')
+            number=$(echo "$pr" | jq -r '.number')
+            echo "PR #$number: Commit $commit - Title: $title"
+          done
+
       - name: Replace commit messages with PR titles
         run: |
           prs=$(gh pr list --state merged --json title,number,mergeCommit)
@@ -101,10 +112,25 @@ jobs:
             number=$(echo "$pr" | jq -r '.number')
             safe_commit=$(printf '%s' "$commit" | sed 's/[\/&]/\\&/g')
             safe_title=$(printf '%s' "$title" | sed 's/[\/&]/\\&/g')
-            sed -i "s/$safe_commit.*/- $safe_title (PR #$number)/" CHANGELOG.md
+            echo "Replacing commit $safe_commit with title $safe_title"
+            sed -i "/$safe_commit/ s/.*/- $safe_title (PR #$number)/" CHANGELOG.md
           done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # - name: Replace commit messages with PR titles
+      #   run: |
+      #     prs=$(gh pr list --state merged --json title,number,mergeCommit)
+      #     echo "$prs" | jq -c '.[]' | while read -r pr; do
+      #       commit=$(echo "$pr" | jq -r '.mergeCommit.oid')
+      #       title=$(echo "$pr" | jq -r '.title')
+      #       number=$(echo "$pr" | jq -r '.number')
+      #       safe_commit=$(printf '%s' "$commit" | sed 's/[\/&]/\\&/g')
+      #       safe_title=$(printf '%s' "$title" | sed 's/[\/&]/\\&/g')
+      #       sed -i "s/$safe_commit.*/- $safe_title (PR #$number)/" CHANGELOG.md
+      #     done
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Publish Shared Components to npm
         if: ${{steps.release.outputs.release_created}}

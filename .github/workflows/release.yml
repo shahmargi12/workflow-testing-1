@@ -91,22 +91,60 @@ jobs:
           release-type: node
           token: ${{ secrets.GITHUB_TOKEN }}
 
-
-      - name: Get Release PR Info
-        id: get-pr
+      - name: Update CHANGELOG.md
+        id: update-changelog
         run: |
-          pr_number=$(gh pr list --state open --json number,title --jq '.[] | select(.title | contains("Release:")) | .number')
-          echo "PR_NUMBER=$pr_number" >> $GITHUB_ENV
+          # Fetch the latest release PR
+          pr_number=$(gh pr list --state open --json number,title --jq '.[] | select(.title | contains("Release:")) | .number' | head -n 1)
+          
+          # Fetch PR details
+          if [ -z "$pr_number" ]; then
+            echo "No release PR found."
+            exit 1
+          fi
+
+          # Get commit messages from the release PR
+          commits=$(gh pr view $pr_number --json commits --jq '.commits | .[] | .commit.message' | sed 's/"/\\"/g')
+
+          # Format changelog entries with PR titles
+          changelog_entries=""
+          while IFS= read -r commit_message; do
+            pr_title=$(gh pr list --state merged --json title,number --jq ".[] | select(.title == \"$commit_message\") | .title")
+            if [ -n "$pr_title" ]; then
+              changelog_entries+="- $pr_title (PR #$pr_number)\n"
+            fi
+          done <<< "$commits"
+
+          # Update CHANGELOG.md
+          if [ -n "$changelog_entries" ]; then
+            sed -i "/## \[Unreleased\]/a \n### Changes\n$changelog_entries" CHANGELOG.md
+          fi
+
+          # Commit changes
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add CHANGELOG.md
+          git commit -m "Update CHANGELOG.md with PR titles for release"
+          git push
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Debug PR Titles and Commits
-        run: |
-          prs=$(gh pr list --state merged --json title,number,mergeCommit)
-          echo "$prs" > pr_debug.json
-          cat pr_debug.json
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # - name: Get Release PR Info
+      #   id: get-pr
+      #   run: |
+      #     pr_number=$(gh pr list --state open --json number,title --jq '.[] | select(.title | contains("Release:")) | .number')
+      #     echo "PR_NUMBER=$pr_number" >> $GITHUB_ENV
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # - name: Debug PR Titles and Commits
+      #   run: |
+      #     prs=$(gh pr list --state merged --json title,number,mergeCommit)
+      #     echo "$prs" > pr_debug.json
+      #     cat pr_debug.json
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # - name: Replace commit messages with PR titles
       #   run: |
@@ -123,31 +161,31 @@ jobs:
       #   env:
       #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Replace Commit Messages with PR Titles
-        if: ${{ env.PR_NUMBER }}
-        run: |
-          prs=$(gh pr view ${{ env.PR_NUMBER }} --json commits --jq '.commits | .[] | .commit.message')
-          echo "$prs" | jq -c '.[]' | while read -r commit_message; do
-            commit=$(echo "$commit_message" | jq -r '.commit')
-            title=$(gh pr view ${{ env.PR_NUMBER }} --json title --jq '.title')
-            safe_commit=$(printf '%s' "$commit" | sed 's/[\/&]/\\&/g')
-            safe_title=$(printf '%s' "$title" | sed 's/[\/&]/\\&/g')
-            echo "Replacing commit $safe_commit with title $safe_title"
-            sed -i "s/$safe_commit.*/- $safe_title/" CHANGELOG.md
-          done
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Replace Commit Messages with PR Titles
+      #   if: ${{ env.PR_NUMBER }}
+      #   run: |
+      #     prs=$(gh pr view ${{ env.PR_NUMBER }} --json commits --jq '.commits | .[] | .commit.message')
+      #     echo "$prs" | jq -c '.[]' | while read -r commit_message; do
+      #       commit=$(echo "$commit_message" | jq -r '.commit')
+      #       title=$(gh pr view ${{ env.PR_NUMBER }} --json title --jq '.title')
+      #       safe_commit=$(printf '%s' "$commit" | sed 's/[\/&]/\\&/g')
+      #       safe_title=$(printf '%s' "$title" | sed 's/[\/&]/\\&/g')
+      #       echo "Replacing commit $safe_commit with title $safe_title"
+      #       sed -i "s/$safe_commit.*/- $safe_title/" CHANGELOG.md
+      #     done
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Commit and Push Changes
-        if: ${{ env.PR_NUMBER }}
-        run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-          git add CHANGELOG.md
-          git commit -m "Update CHANGELOG.md with PR titles"
-          git push
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Commit and Push Changes
+      #   if: ${{ env.PR_NUMBER }}
+      #   run: |
+      #     git config --global user.name 'github-actions'
+      #     git config --global user.email 'github-actions@github.com'
+      #     git add CHANGELOG.md
+      #     git commit -m "Update CHANGELOG.md with PR titles"
+      #     git push
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
       - name: Publish Shared Components to npm

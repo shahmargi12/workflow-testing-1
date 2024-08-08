@@ -1,5 +1,52 @@
 # Changelog
 
+## [0.0.19](https://github.com/shahmargi12/workflow-testing-1/compare/v0.0.18...v0.0.19) (2024-08-08)
+
+
+### Features
+
+* add txt file ([b78e13d](https://github.com/shahmargi12/workflow-testing-1/commit/b78e13d7291248cf8b6d375f688de0cad3817b5a))
+* change .yml file ([eb02831](https://github.com/shahmargi12/workflow-testing-1/commit/eb0283141d8d5a71a79b401017882a8a9274e5d8))
+* change .yml file ([a5e1368](https://github.com/shahmargi12/workflow-testing-1/commit/a5e13688df751462f645e1a43195514425c3e280))
+* change .yml file ([6d459fa](https://github.com/shahmargi12/workflow-testing-1/commit/6d459fa133ce1208249d9cdb5866803c9aec5e19))
+* change .yml file ([60dccef](https://github.com/shahmargi12/workflow-testing-1/commit/60dccef810f208b40f9805a46de4ee74975e5576))
+* change .yml file ([fe01656](https://github.com/shahmargi12/workflow-testing-1/commit/fe016566de069a04e1f53b9fdc30268e79d20cf6))
+* change .yml file ([2ea1b65](https://github.com/shahmargi12/workflow-testing-1/commit/2ea1b65908f02d810cf0ea8703528178f16265ba))
+* change .yml file ([e515fcb](https://github.com/shahmargi12/workflow-testing-1/commit/e515fcb7f67f45b12f41f2ef7d85baaefddf1727))
+* change .yml file ([75c8102](https://github.com/shahmargi12/workflow-testing-1/commit/75c81029d438368f1dbb7bfb6463f5835b229af2))
+* change label ([078aae7](https://github.com/shahmargi12/workflow-testing-1/commit/078aae7a37744a4c7b311bf00002a346f0a42310))
+* change package version ([32f7a7a](https://github.com/shahmargi12/workflow-testing-1/commit/32f7a7acdef938ab7731b54f3dcd67e7ee77ff1c))
+* change package version ([e9d8c18](https://github.com/shahmargi12/workflow-testing-1/commit/e9d8c1897cad4c96530b619f3bd229f48123f213))
+* change package version ([5860775](https://github.com/shahmargi12/workflow-testing-1/commit/58607753b80626ef0bf2913f940ccd610a995a9a))
+* change title ([64a208c](https://github.com/shahmargi12/workflow-testing-1/commit/64a208c299f65ac7f7ac41a84ac734970d12a54b))
+* change tooltip label ([ffe94a0](https://github.com/shahmargi12/workflow-testing-1/commit/ffe94a0a859618b96162f532e234e1ba7bb07463))
+* package change ([9b2e884](https://github.com/shahmargi12/workflow-testing-1/commit/9b2e88491237a0d53b263066235f9a9be42608ff))
+* package change ([f409b9d](https://github.com/shahmargi12/workflow-testing-1/commit/f409b9d20a90b45204d6899c0262bb8d635ffe1b))
+* Update pr check.yml ([1359a1c](https://github.com/shahmargi12/workflow-testing-1/commit/1359a1c121293ad2bf92c2d1b0626be4781b1596))
+* Update pr check.yml ([e3e45ab](https://github.com/shahmargi12/workflow-testing-1/commit/e3e45abfb1132fec891118d994372a5dd789669f))
+* Update release.yml ([2b99b3a](https://github.com/shahmargi12/workflow-testing-1/commit/2b99b3a6b19caebe516267a4b7efe0326936f3b3))
+* Update release.yml ([87c3dfe](https://github.com/shahmargi12/workflow-testing-1/commit/87c3dfec5553ae3552d61cad497797c5202a3a75))
+* Update release.yml ([d34efe0](https://github.com/shahmargi12/workflow-testing-1/commit/d34efe0f1326b3f444f97e47156bba499347b9be))
+* Update release.yml ([776e17a](https://github.com/shahmargi12/workflow-testing-1/commit/776e17ab14bf9102d0fe9539ab05eda77d71cb68))
+* Update release.yml ([717743c](https://github.com/shahmargi12/workflow-testing-1/commit/717743ce36ca2a7e66d6600f65b4ce771ec2edc5))
+* Update release.yml ([bd34fa5](https://github.com/shahmargi12/workflow-testing-1/commit/bd34fa563042d9eff5edac4fb2c7701820e4b1f8))
+* Update release.yml release ([ffdb2fe](https://github.com/shahmargi12/workflow-testing-1/commit/ffdb2fe5798c8d2a216966303d367f2c7f7dca3f))
+
+
+### Bug Fixes
+
+* change label ([b4958d7](https://github.com/shahmargi12/workflow-testing-1/commit/b4958d79003d9fcd6aed497b41de0eccf902d8f0))
+* yml file update ([809e8a4](https://github.com/shahmargi12/workflow-testing-1/commit/809e8a4f62d8db5b62b48fb2d529d1d9fb3216f0))
+* yml file update ([c398a95](https://github.com/shahmargi12/workflow-testing-1/commit/c398a95d7a95899f87b141363b4fd96fb41142e8))
+* yml file update ([2437132](https://github.com/shahmargi12/workflow-testing-1/commit/243713223299aa761a3226b1ac57bba01fdee469))
+* yml file update ([a4eca35](https://github.com/shahmargi12/workflow-testing-1/commit/a4eca35b52f6d98fa73dc7f0de778b6087b2b1bc))
+* yml file update ([#27](https://github.com/shahmargi12/workflow-testing-1/issues/27)) ([ce9ee93](https://github.com/shahmargi12/workflow-testing-1/commit/ce9ee93b408790c45d0d8370282a042dd15b4714))
+
+
+### Miscellaneous Chores
+
+* release 0.0.19 ([23267a9](https://github.com/shahmargi12/workflow-testing-1/commit/23267a920c50709139ded28bd568442d58db6df2))
+
 ## [0.0.18](https://github.com/shahmargi12/workflow-testing-1/compare/v0.0.17...v0.0.18) (2024-08-07)
 
 

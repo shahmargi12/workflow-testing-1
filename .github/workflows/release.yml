@@ -95,7 +95,7 @@ jobs:
         id: update-changelog
         run: |
           # Fetch the latest release PR
-          pr_number=$(gh pr list --state open --json number,title --jq '.[] | select(.title | contains("Release:")) | .number' | head -n 1)
+          pr_number=$(gh pr list --state open --json number,title --jq '.[] | select(.title | startswith("chore(main): release")) | .number' | head -n 1)
           
           # Fetch PR details
           if [ -z "$pr_number" ]; then

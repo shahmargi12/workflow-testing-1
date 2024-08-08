@@ -99,7 +99,9 @@ jobs:
             commit=$(echo "$pr" | jq -r '.mergeCommit.oid')
             title=$(echo "$pr" | jq -r '.title')
             number=$(echo "$pr" | jq -r '.number')
-            sed -i "s/$(printf '%s' "$commit")/- $(printf '%s' "$title") (PR #$(printf '%s' "$number"))/" CHANGELOG.md
+            safe_commit=$(printf '%s' "$commit" | sed 's/[\/&]/\\&/g')
+            safe_title=$(printf '%s' "$title" | sed 's/[\/&]/\\&/g')
+            sed -i "s/$safe_commit.*/- $safe_title (PR #$number)/" CHANGELOG.md
           done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
